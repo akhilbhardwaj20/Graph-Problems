@@ -25,7 +25,7 @@ class Solve {
         } 
         m[i][j] = 0;   // we have visited this cell 
         dfs(m, n, res, i + 1, j, s + "D");
-        dfs(m, n, res, i, j - 1, s + "L");
+        dfs(m, n, res, i, j - 1, s + "L"); 
         dfs(m, n, res, i, j + 1, s + "R");
         dfs(m, n, res, i - 1, j, s + "U");
         m[i][j] = 1;  // mark as unvisited
