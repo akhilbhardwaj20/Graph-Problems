@@ -1,0 +1,61 @@
+// Disjoint set Union implementation (raw code)
+
+// step1 : make rank arr, and a parent arr
+
+int rank[100000];
+int par[100000];
+
+
+void makeSet() {
+   for(int i=0; i<=n; i++) {
+       par[i] = -1;
+       rank[i] = 0;
+   }
+}
+
+int findPar(int node) {
+    if(node == par[node]) {      // if parent of that i itself return that node
+       return node;
+    }                            // else if parent is other then the node itself , like   6---->5---->4   par(6) = 4
+     return findPar(par[node]);         // now in order to make path compressed, simply write par[node] = findPar(par[node]);
+} 
+
+
+// union technique
+
+void union(int u, int v) {
+     u = findPar(u);              // figure out the parent of both u and v
+     v = findPar(v);
+     
+     if(rank[u] < rank[v]) {     // if rank of u is less than v, attach u to v (v as parent)
+         par[u] = v;
+     } else if(rank[v] < rank[u]) {
+         par[v] = u;
+     } else {                   // if rank(u) = rank(v) we can attach to any one (assume we attach v to u)
+          par[v] = u;           // now we are attaching two similar rank nodes, so depth of tree increase by one (increase rank of parent by one)
+          rank[u]++;
+     }
+}
+
+
+void main() {
+int m;        // if someone gives u m operations
+cin>>m;
+while(m--) {
+    int u,v;
+    union(u,v);
+}
+
+// Ques: if 2 and 3 belong to the same component
+if(findPar(2) != findPar(3)) {
+          cout<< "Different Component";
+} else {
+          cout<< "Same";
+}
+makeSet();
+}
+
+
+
+
+
